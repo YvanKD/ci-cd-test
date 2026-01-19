@@ -1,7 +1,8 @@
+name: Première CI
+
 on:
   push:
-    branches: [ main, develop ]
-  pull_request:
+    branches: main
 
 jobs:
   build:
@@ -10,6 +11,11 @@ jobs:
     steps:
       - name: Récupération du code
         uses: actions/checkout@v4
+
+      - name: Installation de Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
       - name: Installation des dépendances
         run: npm install
