@@ -1,0 +1,21 @@
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupération du code
+        uses: actions/checkout@v4
+
+      - name: Installation des dépendances
+        run: npm install
+
+      - name: Lint du code
+        run: npm run lint
+
+      - name: Tests
+        run: npm run test
