@@ -50,11 +50,11 @@ jobs:
           -d '{
             "username": "CI/CD Bot",
             "embeds": [{
-              "title": "❌ Pipeline échouée : ça marche pas"
+              "title": "❌ Pipeline échouée : ça marche pas Brybry"
             }]
           }' \
           ${{ secrets.DISCORD_WEBHOOK }}
-          
+
   deploy:
     runs-on: ubuntu-latest  
 
