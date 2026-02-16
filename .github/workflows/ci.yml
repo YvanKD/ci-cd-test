@@ -7,6 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+  
 
     steps:
       - name: Récupération du code
@@ -25,3 +26,13 @@ jobs:
 
       - name: Tests
         run: npm run test
+  deploy:
+    runs-on: ubuntu-latest  
+
+    steps:
+      - uses: ttskch/render-deploy@v1.0.0
+        with:
+          # On utilise maintenant le Secret pour la sécurité
+          api-key: ${{ secrets.RENDER_API_KEY }}
+          service-id: srv-d69ds53uibrs739eiu0g
+ 
