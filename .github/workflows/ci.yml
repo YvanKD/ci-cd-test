@@ -24,8 +24,28 @@ jobs:
       - name: Lint du code
         run: npm run lint
 
+        # Scan de vulnérabilités SCA
+      - name: SCA - Audit des dépendances
+        run: npm audit --audit-level=high
+
+        # Scan de failles du code SAST
+      - name: SAST - Scan du code source (Semgrep)
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: p/javascript
+
       - name: Tests
         run: npm run test
+
+        # Notifier sur discord      
+      - name: Notify Discord (Failure)
+        if: failure()
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d '{"content":"❌ Pipeline FAILED ! Vérifiez les vulnérabilités."}' \
+          ${{ secrets.DISCORD_WEBHOOK }}
+  
   deploy:
     runs-on: ubuntu-latest  
 
